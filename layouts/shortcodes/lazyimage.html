@@ -24,47 +24,47 @@
 {{ $img := imageConfig ($src.RelPermalink | printf "content/posts/%s" ) }}
 
 <picture>
-  <div class="img" style="background: url(data:image/jpeg;base64,{{ $lqip.Content | base64Encode }}); background-size: cover">
+  <div class="img" style="background: url(data:image/jpeg;base64,{{ $lqip.Content | base64Encode }}); background-size: auto 100%; background-repeat: no-repeat; background-position: center;">
     <svg width="{{ $img.Width }}" height="{{ $img.Height }}" aria-hidden="true"></svg>
     <img
         class="lazyload"
         data-sizes="auto"
         data-srcset='
-        {{ if ge $src.Width "640" }}
-        {{ with $tiny.RelPermalink }}{{.}} 640w {{ end }}
-        {{ end }}
-        {{ if ge $src.Width "960" }}
-        {{ with $small.RelPermalink }}, {{.}} 960w {{ end }}
-        {{ end }}
-        {{ if ge $src.Width "1200" }}
-        {{ with $medium.RelPermalink }}, {{.}} 1200w {{ end }}
-        {{ end }}
-        {{ if ge $src.Width "1600" }}
-        {{ with $large.RelPermalink }}, {{.}} 1600w {{ end }}
-        {{ end }}'
+        {{- if ge $src.Width "640" }}
+        {{- with $tiny.RelPermalink }}{{.}} 640w {{- end }}
+        {{- end }}
+        {{- if ge $src.Width "960" }}
+        {{- with $small.RelPermalink }}, {{.}} 960w {{- end }}
+        {{- end }}
+        {{- if ge $src.Width "1200" }}
+        {{- with $medium.RelPermalink }}, {{.}} 1200w {{- end }}
+        {{- end }}
+        {{- if ge $src.Width "1600" }}
+        {{- with $large.RelPermalink }}, {{.}} 1600w {{- end }}
+        {{- end }}'
         data-src="{{ $src.RelPermalink }}"
         width="{{ $img.Width }}" height="{{ $img.Height }}"
-        {{ with .Get "alt" }}alt='{{.}}'{{ end }} uk-img>
+        {{ with .Get "alt" }}alt='{{.}}'{{ end }}>
     <noscript>
         <img
         loading="lazy"
         {{ with .Get "sizes" }}sizes='{{.}}'{{ else }}{{ end }}
         srcset='
-        {{ if ge $src.Width "640" }}
-            {{ with $tiny.RelPermalink }}{{.}} 640w {{ end }}
-        {{ end }}
-        {{ if ge $src.Width "960" }}
-            {{ with $small.RelPermalink }}, {{.}} 960w {{ end }}
-        {{ end }}
-        {{ if ge $src.Width "1200" }}
-            {{ with $medium.RelPermalink }}, {{.}} 1200w {{ end }}
-        {{ end }}
-        {{ if ge $src.Width "1600" }}
-            {{ with $large.RelPermalink }}, {{.}} 1600w {{ end }}
-        {{ end }}'
+        {{- if ge $src.Width "640" }}
+            {{- with $tiny.RelPermalink }}{{.}} 640w {{- end }}
+        {{- end }}
+        {{- if ge $src.Width "960" }}
+            {{- with $small.RelPermalink }}, {{.}} 960w {{- end }}
+        {{- end }}
+        {{- if ge $src.Width "1200" }}
+            {{- with $medium.RelPermalink }}, {{.}} 1200w {{- end }}
+        {{- end }}
+        {{- if ge $src.Width "1600" }}
+            {{- with $large.RelPermalink }}, {{.}} 1600w {{- end }}
+        {{- end }}'
             src="{{ $src.RelPermalink }}"
         width="{{ $img.Width }}" height="{{ $img.Height }}"
-        {{ with .Get "alt" }}alt='{{.}}'{{ end }} uk-img>
+        {{ with .Get "alt" }}alt='{{.}}'{{ end }}>
     </noscript>
   </div>
 </picture>
