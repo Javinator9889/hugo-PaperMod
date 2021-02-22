@@ -5,10 +5,10 @@
 {{/* set image sizes, these are hardcoded for now, x dictates that images are resized to this width */}}
 
 {{ $lqipw := default "20x" }}
-{{ $tinyw := default "500x" }}
-{{ $smallw := default "800x" }}
+{{ $tinyw := default "640x" }}
+{{ $smallw := default "960x" }}
 {{ $mediumw := default "1200x" }}
-{{ $largew := default "1500x" }}
+{{ $largew := default "1600x" }}
 
 {{/* resize the src image to the given sizes */}}
 
@@ -30,41 +30,41 @@
         class="lazyload"
         data-sizes="auto"
         data-srcset='
-        {{ if ge $src.Width "500" }}
-        {{ with $tiny.RelPermalink }}{{.}} 500w{{ end }}
+        {{ if ge $src.Width "640" }}
+        {{ with $tiny.RelPermalink }}{{.}} 640w {{ end }}
         {{ end }}
-        {{ if ge $src.Width "800" }}
-        {{ with $small.RelPermalink }}, {{.}} 800w{{ end }}
+        {{ if ge $src.Width "960" }}
+        {{ with $small.RelPermalink }}, {{.}} 960w {{ end }}
         {{ end }}
         {{ if ge $src.Width "1200" }}
-        {{ with $medium.RelPermalink }}, {{.}} 1200w{{ end }}
+        {{ with $medium.RelPermalink }}, {{.}} 1200w {{ end }}
         {{ end }}
-        {{ if ge $src.Width "1500" }}
-        {{ with $large.RelPermalink }}, {{.}} 1500w {{ end }}
+        {{ if ge $src.Width "1600" }}
+        {{ with $large.RelPermalink }}, {{.}} 1600w {{ end }}
         {{ end }}'
         data-src="{{ $src.RelPermalink }}"
         width="{{ $img.Width }}" height="{{ $img.Height }}"
-        {{ with .Get "alt" }}alt='{{.}}'{{ end }}>
+        {{ with .Get "alt" }}alt='{{.}}'{{ end }} uk-img>
     <noscript>
         <img
         loading="lazy"
         {{ with .Get "sizes" }}sizes='{{.}}'{{ else }}{{ end }}
         srcset='
-        {{ if ge $src.Width "500" }}
-            {{ with $tiny.RelPermalink }}{{.}} 500w{{ end }}
+        {{ if ge $src.Width "640" }}
+            {{ with $tiny.RelPermalink }}{{.}} 640w {{ end }}
         {{ end }}
-        {{ if ge $src.Width "800" }}
-            {{ with $small.RelPermalink }}, {{.}} 800w{{ end }}
+        {{ if ge $src.Width "960" }}
+            {{ with $small.RelPermalink }}, {{.}} 960w {{ end }}
         {{ end }}
         {{ if ge $src.Width "1200" }}
-            {{ with $medium.RelPermalink }}, {{.}} 1200w{{ end }}
+            {{ with $medium.RelPermalink }}, {{.}} 1200w {{ end }}
         {{ end }}
-        {{ if ge $src.Width "1500" }}
-            {{ with $large.RelPermalink }}, {{.}} 1500w {{ end }}
+        {{ if ge $src.Width "1600" }}
+            {{ with $large.RelPermalink }}, {{.}} 1600w {{ end }}
         {{ end }}'
             src="{{ $src.RelPermalink }}"
         width="{{ $img.Width }}" height="{{ $img.Height }}"
-        {{ with .Get "alt" }}alt='{{.}}'{{ end }}>
+        {{ with .Get "alt" }}alt='{{.}}'{{ end }} uk-img>
     </noscript>
   </div>
 </picture>
