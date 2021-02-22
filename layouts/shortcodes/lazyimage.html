@@ -1,6 +1,12 @@
 {{/* get file that matches the filename as specified as src="" in shortcode */}}
-{{ $src := .Page.Resources.GetMatch (printf "*%s*" (.Get "src")) }}
-{{/*  {{ $src := $.Page.Resources.GetMatch (.Get 0) }}  */}}
+{{ $src := (.Page.Resources.GetMatch (printf "*%s*" (.Get "src"))) }}
+
+{{ .Scratch.Set "width" $src.Width }}
+{{ if (.Get "width") }}
+  {{ $width := (.Get "width") }}
+  {{ .Scratch.Set "width" $width }}
+{{ end }}
+{{ $src := $src.Resize (printf "%dx" (.Scratch.Get "width")) }}
 
 {{/* set image sizes, these are hardcoded for now, x dictates that images are resized to this width */}}
 
@@ -21,11 +27,10 @@
 {{/* only use images smaller than or equal to the src (original) image size, as Hugo will upscale small images */}}
 {{/* set the sizes attribute to (min-width: 35em) 1200px, 100vw unless overridden in shortcode */}}
 
-{{ $img := imageConfig ($src.RelPermalink | printf "content/posts/%s" ) }}
 
 <picture>
   <div class="img" style="background: url(data:image/jpeg;base64,{{ $lqip.Content | base64Encode }}); background-size: auto 100%; background-repeat: no-repeat; background-position: center;">
-    <svg width="{{ $img.Width }}" height="{{ $img.Height }}" aria-hidden="true"></svg>
+    <svg width="{{ $src.Width }}" height="{{ $src.Height }}" aria-hidden="true"></svg>
     <img
         class="lazyload"
         data-sizes="auto"
@@ -43,7 +48,7 @@
         {{- with $large.RelPermalink }}, {{.}} 1600w {{- end }}
         {{- end }}'
         data-src="{{ $src.RelPermalink }}"
-        width="{{ $img.Width }}" height="{{ $img.Height }}"
+        width="{{ $src.Width }}" height="{{ $src.Height }}"
         {{ with .Get "alt" }}alt='{{.}}'{{ end }}>
     <noscript>
         <img
@@ -63,7 +68,7 @@
             {{- with $large.RelPermalink }}, {{.}} 1600w {{- end }}
         {{- end }}'
             src="{{ $src.RelPermalink }}"
-        width="{{ $img.Width }}" height="{{ $img.Height }}"
+        width="{{ $src.Width }}" height="{{ $src.Height }}"
         {{ with .Get "alt" }}alt='{{.}}'{{ end }}>
     </noscript>
   </div>
