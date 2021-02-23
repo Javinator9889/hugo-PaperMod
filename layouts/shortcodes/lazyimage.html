@@ -6,7 +6,7 @@
   {{ $width := (.Get "width") }}
   {{ .Scratch.Set "width" $width }}
 {{ end }}
-{{ $src := $src.Resize (printf "%dx" (.Scratch.Get "width")) }}
+{{ $src := $src.Resize (printf "%dx q100" (.Scratch.Get "width")) }}
 
 {{/* set image sizes, these are hardcoded for now, x dictates that images are resized to this width */}}
 
